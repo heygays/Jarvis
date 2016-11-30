@@ -1,0 +1,12 @@
+<resources>
+    <!--toolbar右边三个点点的样式（白色）-->
+    <style name="Sly_AppTheme.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="actionMenuTextColor">#fff</item>
+        <item name="actionMenuTextAppearance">@style/Sly_AppTheme.actionMenuTextSize</item>
+    </style>
+
+    <style name="Sly_AppTheme.actionMenuTextSize" parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Menu">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+</resources>

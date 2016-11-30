@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!--ImageTextView-->
+    <declare-styleable name="ImageTextView">
+        <attr name="checkedStatus" format="boolean" />
+        <attr name="defaultImg" format="reference" />
+        <attr name="checkedImg" format="reference" />
+        <attr name="defaultTextColor" format="color" />
+        <attr name="checkedTextColor" format="color" />
+        <attr name="topText" format="string" />
+        <attr name="bottomText" format="string" />
+        <attr name="leftText" format="string" />
+        <attr name="rightText" format="string" />
+        <attr name="innerPadding" format="dimension" />
+        <attr name="textSize" format="dimension" />
+    </declare-styleable>
+    <!--SwitchButton-->
+    <declare-styleable name="SwitchButton">
+        <attr name="backPadding" format="dimension" />
+        <attr name="defaultRoundBtnColor" format="color" />
+        <attr name="openedRoundBtnColor" format="color" />
+        <attr name="backColorOn" format="color" />
+        <attr name="backColorOff" format="color" />
+    </declare-styleable>
+    <!--RoundImageView-->
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_fill_color" format="color" />
+    </declare-styleable>
+</resources>
