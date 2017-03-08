@@ -1,8 +1,11 @@
 package com.heygays.jarvis.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -13,8 +16,10 @@ import android.view.View;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.heygays.jarvis.R;
+import com.heygays.jarvis.dialog.DialogHelper;
 
 /**
  * 最基本的Activity
@@ -25,8 +30,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected LinearLayout baseRootView;
     protected FrameLayout baseContentLayout;
-    protected FrameLayout baseLoadingLayout;
-    protected FrameLayout baseErrorHintLayout;
+    protected LinearLayout baseLoadingLayout;
     protected AppBarLayout baseAppBarLayout;
     protected Toolbar baseToolBar;
     private View splitLineV;
@@ -53,8 +57,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         });
         baseContentLayout = (FrameLayout) findViewById(R.id.ac_base_contentlayout);
-        baseErrorHintLayout = (FrameLayout) findViewById(R.id.ac_base_errorhintlayout);
-        baseLoadingLayout = (FrameLayout) findViewById(R.id.ac_base_loadinglayout);
+        baseLoadingLayout = (LinearLayout) findViewById(R.id.ac_base_loadinglayout);
         splitLineV = findViewById(R.id.ac_base_splitLine);
         //5.0以下appbar没有阴影所以用view划一条线
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -65,7 +68,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (getContentView() != 0) {
             addContentView(getContentView());
         }
-        addContentViewFinish();
+        setContentViewOver();
         initUI();
         initData();
     }
@@ -77,7 +80,6 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     private void addContentView(int layoutId) {
         LayoutInflater mInflater = LayoutInflater.from(this);
-        baseErrorHintLayout.setVisibility(View.GONE);
         baseContentLayout.setVisibility(View.VISIBLE);
         mInflater.inflate(layoutId, baseContentLayout);
     }
@@ -90,9 +92,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract int getContentView();
 
     /**
-     * 布局加载完成(因为ButterKnife能找到所有的view必须在布局都加载完后)
+     * 布局加载完成(因为ButterKnife能找到所有的view必须在setContentView之后)
      */
-    protected abstract void addContentViewFinish();
+    protected abstract void setContentViewOver();
 
     /**
      * 初始化控件及其行为
@@ -103,6 +105,16 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 初始化数据
      */
     protected abstract void initData();
+
+    /**
+     * 打开指定Activity
+     *
+     * @param clz
+     */
+    public void openActivity(Class<? extends Activity> clz) {
+        Intent intent = new Intent(this, clz);
+        startActivity(intent);
+    }
 
     /**
      * 隐藏appbar的阴影
@@ -140,27 +152,27 @@ public abstract class BaseActivity extends AppCompatActivity {
         baseLoadingLayout.setVisibility(View.GONE);
     }
 
-    /**
-     * 页面加载数据失败提示
-     *
-     * @param layoutId 自己的提示布局
-     */
-    public void setErrorHintContentView(int layoutId) {
-        baseErrorHintLayout.removeAllViews();
-        LayoutInflater mInflater = LayoutInflater.from(this);
-        baseContentLayout.setVisibility(View.GONE);
-        baseErrorHintLayout.setVisibility(View.VISIBLE);
-        mInflater.inflate(layoutId, baseErrorHintLayout);
+    public void showToast(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    }
+
+    public void showSnack(String text) {
+        Snackbar.make(baseRootView, text, Snackbar.LENGTH_SHORT).show();
     }
 
     /**
-     * 取消加载数据失败提示
+     * 简单的提示对话框
+     *
+     * @param msg
      */
-    public void cancelErrorHintContentView() {
-        baseErrorHintLayout.removeAllViews();
-        baseErrorHintLayout.setVisibility(View.GONE);
-        baseContentLayout.setVisibility(View.VISIBLE);
+    public void showSimpleDialog(String msg) {
+        DialogHelper.create(this)
+                .setMsg(msg)
+                .setRightBtn("确定", null)
+                .show();
     }
+
+
 /*----------------------Fragment相关-------------------------------*/
 
     /**

@@ -30,11 +30,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
- * Volley轻量框架，适用常规的get，post方式
+ * Volley轻量封装，适用常规的get，post方式，方便快速
  *
  * @version 1.0.1
  * @time 2016-03-13
- * @changed:增加设置服务器响应编码格式防止出现乱码
  */
 public class VolleyRequset {
 

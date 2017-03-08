@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
-
+    <!--标题部分-->
     <android.support.design.widget.AppBarLayout
         android:id="@+id/ac_base_appBarLayout"
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
             app:titleTextColor="@color/White">
 
         </android.support.v7.widget.Toolbar>
-
+        <!--标题和内容的分割线（5.0以下使用）-->
         <View
             android:id="@+id/ac_base_splitLine"
             android:layout_width="match_parent"
@@ -33,40 +33,31 @@
     </android.support.design.widget.AppBarLayout>
 
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/White"
-        android:orientation="vertical">
-
+        android:background="@color/White">
 
         <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <FrameLayout
-                android:id="@+id/ac_base_contentlayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/ac_base_loadinglayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:clickable="true">
-
-            </FrameLayout>
-
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/ac_base_errorhintlayout"
+            android:id="@+id/ac_base_contentlayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
         </FrameLayout>
-    </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ac_base_loadinglayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/Transparent"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+
 </LinearLayout>
